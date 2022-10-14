@@ -8,6 +8,7 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required(),
   number: Yup.string().min(5).max(30).required(),
 });
+
 const initialValue = { name: '', number: '' };
 
 export const Formes = ({ onSubmit }) => {
