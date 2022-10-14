@@ -11,9 +11,10 @@ const validationSchema = Yup.object().shape({
 
 const initialValue = { name: '', number: '' };
 
-export const Formes = ({ onSubmit }) => {
+export const Form = ({ onSubmit }) => {
   const hendleSubmit = (values, { resetForm }) => {
     onSubmit(values);
+
     resetForm();
   };
 
@@ -24,7 +25,7 @@ export const Formes = ({ onSubmit }) => {
       validationSchema={validationSchema}
     >
       <FormContact>
-        <div>
+        <>
           <FormLabel>
             Name
             <Input type="text" name="name" />
@@ -38,10 +39,10 @@ export const Formes = ({ onSubmit }) => {
           </FormLabel>
 
           <FormButton type="submit">Add Contact</FormButton>
-        </div>
+        </>
       </FormContact>
     </Formik>
   );
 };
 
-Formes.propTypes = PropTypes.func.isRequired;
+Form.propTypes = PropTypes.func.isRequired;

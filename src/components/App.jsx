@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Notiflix from 'notiflix';
 import { nanoid } from 'nanoid';
 import { Section } from './App.styled'
-import { Formes } from './FormSection/Form';
+import { Form } from './FormSection/Form';
 import { Filter } from './FilterSection/Filter';
 import { Renderlist } from './ListContact/ListContact';
 import { ContactList } from './ListContact/ListContact.styled';
@@ -20,19 +20,13 @@ export const App = () => {
       number: number,
     };
 
-    if (!contact.map(item => item.name).includes(name)) {
+    const inContact = contact.find(item => item.name === name);
+
+    if (!inContact) {
       setContact(prev => [item, ...prev]);
     } else {
       Notiflix.Notify.warning(`${name} is already is contacts`);
-  };
-
-    const inContact = contact.find(item => item.name === name);
-    if (!inContact) {
-      return this.setState(({ contact }) => ({
-        contact: [item, ...contact],
-      }))
-    }
-    Notiflix.Notify.warning(`${name} is already is contacts`)
+    };
   };
   
   const removeBtn = e => {
@@ -53,7 +47,7 @@ export const App = () => {
   return (
     <Section>
       <h1>Phonebook</h1>
-      <Formes onSubmit={hendleSubmit} />
+      <Form onSubmit={hendleSubmit} />
       <h2>Contacts</h2>
       <Filter value={filter} onFilter={renderFilter} />
       <ContactList>
